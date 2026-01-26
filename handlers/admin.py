@@ -132,7 +132,7 @@ async def handle_media_callback(call: CallbackQuery, callback_data: MediaCallbac
         return
     chat_id = callback_data.chat_id
     months = callback_data.months
-
+    await call.answer()
     try:
         async with async_session() as session:
             user = await get_user_by_chat_id(session, chat_id)
@@ -225,6 +225,7 @@ async def media_cancel_handler(call: CallbackQuery):
         await call.message.answer("Siz admin emassiz")
         return
     chat_id = int(call.data.split(":")[1])
+    await call.answer()
     await call.message.reply(
         f"⛔ Foydalanuvchi ({chat_id}) cheki rad etildi"
     )
@@ -238,14 +239,35 @@ async def sendme_handler(call: CallbackQuery, state: FSMContext):
         await call.message.answer("Siz admin emassiz")
         return
     chat_id = int(call.data.split(":")[1])
+    await call.answer()
     await call.message.reply("<b>Xabaringizni yozing!</b>",
                              parse_mode="HTML")
     await state.set_state(SendUserMessageState.send_user_message)
     await state.update_data(chat_id=chat_id)
 
 
+@router.message(F.text.startswith("/allpremiumusersremovetochanel"))
+async def all_premium_users_remove_to_chanel_handler(message: Message):
+    if message.from_user.id not in ADMINS:
+        await message.answer("Siz admin emassiz")
+        return
+    
+    async with async_session() as session:
+        prem_users = await all_premium_users(session)
+    
+    for prem_user in prem_users:
+        chat_id = prem_user.chat_id
 
-
+        try:
+            await message.bot.unban_chat_member(PREMIUM_ID, chat_id)
+                        
+            for ADMIN in ADMINS:
+                await message.bot.send_message(ADMIN, f"ID : {chat_id}\n"
+                                                           f"Kanaldan chiqarildi")
+        except Exception as e:
+            for ADMIN in ADMINS:
+                await message.bot.send_message(ADMIN,f"{e}\n\n"
+                                                         f"ID : {chat_id}")   
 
 
 @router.message(F.text.startswith("/sleep"))

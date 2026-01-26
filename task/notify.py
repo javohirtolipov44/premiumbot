@@ -3,7 +3,7 @@ from datetime import datetime
 import pytz
 from aiogram import Bot
 
-from config import ADMINS, NOTIFY_DATA, SERVER_PRICE
+from config import ADMINS, NOTIFY_DATA, SERVER_PRICE, PROGRAMMER
 
 tz = pytz.timezone("Asia/Tashkent")
 
@@ -18,7 +18,8 @@ async def monthly_admin_notify(bot: Bot):
                         await bot.send_message(
                         ADMIN,
                         f"<b>📅 Bugun oyning {NOTIFY_DATA}-sanasi!\n"
-                        f"🧾 Serverga pul to'lang: {SERVER_PRICE} so'm</b>",
+                        f"🧾 Serverga pul to'lang: {SERVER_PRICE} so'm\n\n"
+                        f"Aloqa uchun: @{PROGRAMMER}</b>",
                         parse_mode="html"
                         )
                     except Exception as e:
