@@ -27,7 +27,8 @@ async def backup_and_send(bot):
 
     # 📤 yuborish
     with open(file_path, "rb") as f:
-        await bot.send_document(ADMINS[0], f)
+        file = InputFile(f)
+        await bot.send_document(chat_id=ADMINS[0], document=file)
 
 
 async def scheduler(bot: Bot):
