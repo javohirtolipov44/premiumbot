@@ -28,7 +28,9 @@ async def backup_and_send(bot: Bot):
     os.system(f"PGPASSWORD='{DB_PASSWORD}' pg_dump -U {DB_USER} {DB_NAME} > {file_path}")
 
     # 📤 yuborish
+    print(file_path)
     file = InputFile(path=file_path)  # ✅ path beriladi, open() kerak emas
+    print(file)
     await bot.send_document(chat_id=ADMINS[0], document=file)
 
 
