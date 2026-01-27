@@ -29,8 +29,8 @@ async def backup_and_send(bot: Bot):
     # 📤 yuborish
     # ✅ Shu yerda open(..., "rb") bilan obyekt berish yetarli
     
-    with open(file_path, "rb") as f:
-        await bot.send_document(chat_id=ADMINS[0], document=f)
+    file = InputFile(path=file_path)  # ✅ path beriladi
+    await bot.send_document(chat_id=ADMINS[0], document=file)
 
 
 async def scheduler(bot: Bot):
