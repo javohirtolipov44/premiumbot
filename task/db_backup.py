@@ -33,7 +33,7 @@ async def backup_and_send(bot: Bot):
 async def scheduler(bot: Bot):
     while True:
         try:
-            await backup_and_send()
+            await backup_and_send(bot)
         except Exception as e:
             await bot.send_message(ADMINS[0], f"❗ Backup xato: {e}")
 
