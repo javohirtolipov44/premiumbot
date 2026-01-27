@@ -30,7 +30,7 @@ async def backup_and_send(bot: Bot):
     # 📤 yuborish
     # ✅ Shu yerda open(..., "rb") bilan obyekt berish yetarli
     
-    file = InputFile(path=file_path)  # ✅ path beriladi
+    file = InputFile.from_path(file_path)  # ✅ path beriladi
     await bot.send_document(chat_id=ADMINS[0], document=file)
 
 
