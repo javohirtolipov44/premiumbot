@@ -32,9 +32,9 @@ async def backup_and_send(bot):
 
 async def scheduler(bot: Bot):
     while True:
-        try:
-            await backup_and_send(bot)
-        except Exception as e:
-            await bot.send_message(ADMINS[0], f"❗ Backup xato: {e}")
+        #try:
+        await backup_and_send(bot)
+        #except Exception as e:
+            #await bot.send_message(ADMINS[0], f"❗ Backup xato: {e}")
 
         await asyncio.sleep(BACKUP_INTERVAL)
