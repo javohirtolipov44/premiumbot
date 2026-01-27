@@ -28,9 +28,7 @@ async def backup_and_send(bot: Bot):
     os.system(f"PGPASSWORD='{DB_PASSWORD}' pg_dump -U {DB_USER} {DB_NAME} > {file_path}")
 
     # 📤 yuborish
-    # ✅ Shu yerda open(..., "rb") bilan obyekt berish yetarli
-    
-    document = FSInputFile(path_to_file)
+    document = FSInputFile(file_path)
     await bot.send_document(chat_id=123456789, document=document)
 
 
