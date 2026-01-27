@@ -30,7 +30,7 @@ async def backup_and_send(bot: Bot):
         await bot.send_document(ADMINS[0], f)
 
 
-async def scheduler():
+async def scheduler(bot: Bot):
     while True:
         try:
             await backup_and_send()
