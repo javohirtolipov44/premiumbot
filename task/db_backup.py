@@ -4,6 +4,7 @@ import asyncio
 from datetime import datetime
 from aiogram import Bot
 from config import ADMINS
+from aiogram.types import InputFile
 
 DB_NAME = "premiumbot"
 DB_USER = "postgres"
