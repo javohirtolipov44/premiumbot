@@ -29,7 +29,7 @@ async def backup_and_send(bot: Bot):
 
     # 📤 yuborish
     document = FSInputFile(file_path)
-    await bot.send_document(chat_id=123456789, document=document)
+    await bot.send_document(chat_id=ADMINS[0], document=document)
 
 
 async def scheduler(bot: Bot):
