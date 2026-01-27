@@ -3,7 +3,7 @@ import glob
 import asyncio
 from datetime import datetime
 from aiogram import Bot
-from aiogram.types import InputFile
+from aiogram.types import FSInputFile
 from config import ADMINS
 
 DB_NAME = "premiumbot"
@@ -30,8 +30,8 @@ async def backup_and_send(bot: Bot):
     # 📤 yuborish
     # ✅ Shu yerda open(..., "rb") bilan obyekt berish yetarli
     
-    file = InputFile.from_path(file_path)  # ✅ path beriladi
-    await bot.send_document(chat_id=ADMINS[0], document=file)
+    document = FSInputFile(path_to_file)
+    await bot.send_document(chat_id=123456789, document=document)
 
 
 async def scheduler(bot: Bot):
