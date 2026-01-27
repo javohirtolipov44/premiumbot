@@ -3,6 +3,7 @@ import glob
 import asyncio
 from datetime import datetime
 from aiogram import Bot
+from aiogram.types import InputFile
 from config import ADMINS
 
 DB_NAME = "premiumbot"
