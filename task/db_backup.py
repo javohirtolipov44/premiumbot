@@ -10,7 +10,7 @@ DB_USER = "postgres"
 DB_PASSWORD = "123"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BACKUP_DIR = os.path.join(BASE_DIR, "task")
+BACKUP_DIR = os.path.join(BASE_DIR, "backups")
 os.makedirs(BACKUP_DIR, exist_ok=True)
 
 BACKUP_INTERVAL = 60 * 60 * 24  # 24 soat
@@ -29,7 +29,8 @@ async def backup_and_send(bot: Bot):
     # 📤 yuborish
     # ✅ Shu yerda open(..., "rb") bilan obyekt berish yetarli
     
-    await bot.send_document(chat_id=ADMINS[0], document=f"db_backup_{today}.sql")
+    with open(file_path, "rb") as f:
+        await bot.send_document(chat_id=ADMINS[0], document=f)
 
 
 async def scheduler(bot: Bot):
