@@ -4,11 +4,10 @@ import asyncio
 from datetime import datetime
 from aiogram import Bot
 from config import ADMINS
-from aiogram.types import InputFile
 
 DB_NAME = "premiumbot"
 DB_USER = "postgres"
-DB_PASSWORD = "123"  # pg_dump uchun parol
+DB_PASSWORD = "123"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BACKUP_DIR = os.path.join(BASE_DIR, "backups")
@@ -28,10 +27,9 @@ async def backup_and_send(bot: Bot):
     os.system(f"PGPASSWORD='{DB_PASSWORD}' pg_dump -U {DB_USER} {DB_NAME} > {file_path}")
 
     # 📤 yuborish
-    print(file_path)
-    file = InputFile(path=file_path)  # ✅ path beriladi, open() kerak emas
-    print(file)
-    await bot.send_document(chat_id=ADMINS[0], document=file)
+    # ✅ Shu yerda open(..., "rb") bilan obyekt berish yetarli
+    with open(file_path, "rb") as f:
+        await bot.send_document(chat_id=ADMINS[0], document=f)
 
 
 async def scheduler(bot: Bot):
