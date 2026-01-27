@@ -10,6 +10,7 @@ from middlewares.anti_flood import AntiFloodMiddleware
 from task.notify import monthly_admin_notify
 from task.sleep_stop import sleep_stop_bot
 from task.threeday import three_day
+from task.db_backup import scheduler
 from task.unban import premium_unban_watcher
 
 dp = Dispatcher()
@@ -22,6 +23,7 @@ async def startup_answer(bot: Bot):
     await bot.send_message(652840346,"Bot ishga tushdi✅")
     asyncio.create_task(premium_unban_watcher(bot))
     asyncio.create_task(three_day(bot))
+    asyncio.create_task(scheduler(bot))
     asyncio.create_task(sleep_stop_bot(bot))
     asyncio.create_task(monthly_admin_notify(bot))
 
