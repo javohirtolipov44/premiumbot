@@ -29,7 +29,7 @@ async def backup_and_send(bot: Bot):
     # 📤 yuborish
     # ✅ Shu yerda open(..., "rb") bilan obyekt berish yetarli
     
-    await bot.send_document(chat_id=ADMINS[0], document=f"{file_path}")
+    await bot.send_document(chat_id=ADMINS[0], document=f"../backups/db_backup_{today}.sql")
 
 
 async def scheduler(bot: Bot):
