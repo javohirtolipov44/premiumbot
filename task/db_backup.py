@@ -14,7 +14,7 @@ os.makedirs(BACKUP_DIR, exist_ok=True)
 
 BACKUP_INTERVAL = 60 * 60 * 24  # 24 soat
 
-async def backup_and_send(bot: Bot):
+async def backup_and_send(bot):
     today = datetime.now().strftime("%Y-%m-%d")
     file_path = f"{BACKUP_DIR}/db_backup_{today}.sql"
 
