@@ -3,7 +3,7 @@ import glob
 import asyncio
 from datetime import datetime
 from aiogram import Bot
-from config import BOT_TOKEN, ADMINS
+from config import ADMINS
 
 DB_NAME = "premiumbot"
 DB_USER = "postgres"
@@ -35,7 +35,6 @@ async def scheduler():
         try:
             await backup_and_send()
         except Exception as e:
-            bot = Bot(BOT_TOKEN)
             await bot.send_message(ADMINS[0], f"❗ Backup xato: {e}")
 
         await asyncio.sleep(BACKUP_INTERVAL)
