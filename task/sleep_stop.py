@@ -27,6 +27,11 @@ async def sleep_stop_bot(bot: Bot):
 
                 if now_ts >= sleep_time:
                     await delete_bot_sleep(session)
+                    for ADMIN in ADMINS:
+                        await bot.send_message(
+                    ADMIN,
+                    f"Bot sleep vaqti tugadi"
+                )
 
         except Exception as e:
             for ADMIN in ADMINS:
